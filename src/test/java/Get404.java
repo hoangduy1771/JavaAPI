@@ -1,6 +1,3 @@
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,7 +11,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 
-public class Get200 extends BaseClass{
+public class Get404 extends BaseClass{
     CloseableHttpClient client;
     CloseableHttpResponse response;
 
@@ -32,17 +29,16 @@ public class Get200 extends BaseClass{
     @DataProvider (name = "endpoints")
     private Object[][] endpoints() {
         return new Object[][] {
-                {""},
-                {"/rate_limit"},
-                {"/search/repositories?q=java"}
+                {"/nonexistingurl"},
         };
     }
 
+
     @Test (dataProvider = "endpoints")
-    public void baseUrlReturns200(String endPoint) throws IOException {
+    public void nonExistingUrlReturns404(String endPoint) throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + endPoint);
         response = client.execute(get);
         int actualStatus = response.getStatusLine().getStatusCode();
-        assertEquals(200, actualStatus);
+        assertEquals(404, actualStatus);
     }
 }
