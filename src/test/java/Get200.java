@@ -18,9 +18,9 @@ public class Get200 extends BaseClass {
 
     @BeforeMethod
     public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
-        client = HttpClientBuilder.create().setProxy(proxy).build();
-        // client = HttpClientBuilder.create().build();
+//        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
+//        client = HttpClientBuilder.create().setProxy(proxy).build();
+        client = HttpClientBuilder.create().build();
 
     }
 

@@ -18,9 +18,9 @@ public class BodyTestWithMap extends BaseClass {
 
     @BeforeMethod
     public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
-        client = HttpClientBuilder.create().setProxy(proxy).build();
-        // client = HttpClientBuilder.create().build();
+//        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
+//        client = HttpClientBuilder.create().setProxy(proxy).build();
+         client = HttpClientBuilder.create().build();
 
     }
 
@@ -32,7 +32,7 @@ public class BodyTestWithMap extends BaseClass {
 
     @Test
     public void returnsCorrectLogin() throws IOException {
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "user/hoangduy1771@gmail.com");
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "users/hoangduy1771");
         response = client.execute(get);
         String jsonBody = EntityUtils.toString(response.getEntity());
 
