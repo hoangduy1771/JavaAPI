@@ -3,7 +3,6 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -13,15 +12,15 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 
-public class Get401 extends BaseClass{
+public class Get401 extends BaseClass {
     CloseableHttpClient client;
     CloseableHttpResponse response;
 
     @BeforeMethod
     public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com",8080);
+        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
         client = HttpClientBuilder.create().setProxy(proxy).build();
-//        client = HttpClientBuilder.create().build();
+        // client = HttpClientBuilder.create().build();
     }
 
     @AfterMethod
@@ -33,13 +32,13 @@ public class Get401 extends BaseClass{
     @DataProvider(name = "endpoints")
     private Object[][] endpoints() {
         return new Object[][] {
-                {"/user"},
-                {"/user/followers"},
-                {"/notifications"}
+                { "/user" },
+                { "/user/followers" },
+                { "/notifications" }
         };
     }
 
-    @Test (dataProvider = "endpoints")
+    @Test(dataProvider = "endpoints")
     public void userReturns401(String endPoint) throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + endPoint);
         response = client.execute(get);

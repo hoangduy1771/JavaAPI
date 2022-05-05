@@ -1,14 +1,6 @@
-import org.apache.http.Header;
 import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.testng.annotations.AfterMethod;
@@ -20,15 +12,15 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 
-public class Get200 extends BaseClass{
+public class Get200 extends BaseClass {
     CloseableHttpClient client;
     CloseableHttpResponse response;
 
     @BeforeMethod
     public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com",8080);
+        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
         client = HttpClientBuilder.create().setProxy(proxy).build();
-//        client = HttpClientBuilder.create().build();
+        // client = HttpClientBuilder.create().build();
 
     }
 
@@ -38,16 +30,16 @@ public class Get200 extends BaseClass{
         response.close();
     }
 
-    @DataProvider (name = "endpoints")
+    @DataProvider(name = "endpoints")
     private Object[][] endpoints() {
         return new Object[][] {
-                {""},
-                {"/rate_limit"},
-                {"/search/repositories?q=java"}
+                { "" },
+                { "/rate_limit" },
+                { "/search/repositories?q=java" }
         };
     }
 
-    @Test (dataProvider = "endpoints")
+    @Test(dataProvider = "endpoints")
     public void baseUrlReturns200(String endPoint) throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + endPoint);
         response = client.execute(get);

@@ -12,16 +12,16 @@ import java.io.IOException;
 
 import static org.testng.Assert.*;
 
-public class Get404 extends BaseClass{
+public class Get404 extends BaseClass {
     CloseableHttpClient client;
     CloseableHttpResponse response;
 
     @BeforeMethod
     public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com",8080);
+        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
         client = HttpClientBuilder.create().setProxy(proxy).build();
 
-//        client = HttpClientBuilder.create().build();
+        // client = HttpClientBuilder.create().build();
     }
 
     @AfterMethod
@@ -30,15 +30,14 @@ public class Get404 extends BaseClass{
         response.close();
     }
 
-    @DataProvider (name = "endpoints")
+    @DataProvider(name = "endpoints")
     private Object[][] endpoints() {
         return new Object[][] {
-                {"/nonexistingurl"},
+                { "/nonexistingurl" },
         };
     }
 
-
-    @Test (dataProvider = "endpoints")
+    @Test(dataProvider = "endpoints")
     public void nonExistingUrlReturns404(String endPoint) throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + endPoint);
         response = client.execute(get);
