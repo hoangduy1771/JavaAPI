@@ -1,5 +1,6 @@
 import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,4 +41,16 @@ public class RespondUtils {
         return httpHeaders.stream()
                 .anyMatch(header -> header.getName().equalsIgnoreCase(headerName));
     }
+
+    public static Object getValueFor(JSONObject jsonObject,String key) {
+        try {
+            return jsonObject.get(key);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
 }
