@@ -1,5 +1,14 @@
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.Credentials;
+import org.apache.http.auth.NTCredentials;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.impl.client.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,5 +49,4 @@ public class RespondUtils {
         return httpHeaders.stream()
                 .anyMatch(header -> header.getName().equalsIgnoreCase(headerName));
     }
-
 }
