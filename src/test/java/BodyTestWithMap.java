@@ -1,3 +1,4 @@
+import org.apache.http.HttpHost;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -21,9 +22,9 @@ public class BodyTestWithMap extends BaseClass {
 
     @BeforeMethod
     public void setUp() {
-//        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
-//        client = HttpClientBuilder.create().setProxy(proxy).build();
-         client = HttpClientBuilder.create().build();
+        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
+        client = HttpClientBuilder.create().setProxy(proxy).build();
+//         client = HttpClientBuilder.create().build();
 
     }
 
