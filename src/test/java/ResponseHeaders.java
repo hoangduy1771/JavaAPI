@@ -16,22 +16,6 @@ import static org.testng.AssertJUnit.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
 public class ResponseHeaders extends BaseClass {
-    CloseableHttpClient client;
-    CloseableHttpResponse response;
-
-    @BeforeMethod
-    public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
-        client = HttpClientBuilder.create().setProxy(proxy).build();
-//        client = HttpClientBuilder.create().build();
-    }
-
-    @AfterMethod
-    public void closeResources() throws IOException {
-        client.close();
-        response.close();
-    }
-
     @Test
     public void contentType() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT);
