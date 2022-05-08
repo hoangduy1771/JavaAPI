@@ -13,23 +13,6 @@ import java.io.IOException;
 import static org.testng.Assert.*;
 
 public class Get404 extends BaseClass {
-    CloseableHttpClient client;
-    CloseableHttpResponse response;
-
-    @BeforeMethod
-    public void setUp() {
-        HttpHost proxy = new HttpHost("rb-proxy-unix-apac.bosch.com", 8080);
-        client = HttpClientBuilder.create().setProxy(proxy).build();
-
-        // client = HttpClientBuilder.create().build();
-    }
-
-    @AfterMethod
-    public void closeResources() throws IOException {
-        client.close();
-        response.close();
-    }
-
     @DataProvider(name = "endpoints")
     private Object[][] endpoints() {
         return new Object[][] {
