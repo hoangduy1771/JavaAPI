@@ -1,11 +1,6 @@
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.NotFound;
 import entities.User;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -38,9 +33,17 @@ public class BodyTestWithJacksonLib extends BaseClass {
 
         NotFound notFoundMessage = RespondUtils.unmarshallGeneric(response, NotFound.class);
         assertEquals("Not Found", notFoundMessage.getMessage());
-
     }
 
+    @Test
+    public void correctRateLimitAreSet() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/rate_limit");
+        response = client.execute(get);
+
+        RateLimit rateLimit = RespondUtils.unmarshallGeneric(response, RateLimit.class);
+        assertEquals(60, rateLimit.getCoreLimit());
+        assertEquals("10", rateLimit.getSearchLimit());
+    }
 
 
 }
